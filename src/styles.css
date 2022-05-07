@@ -1,0 +1,7 @@
+@import "https://getratha.netlify.app/styles.css";
+@import "./style/sideNavbar.css";
+@import "./style/header.css";  
+@import "./style/videoPage.css"; 
+@import "./style/playList.css"; 
+@import "./style/singleVideo.css"; 
+@import "./style/login.css";       

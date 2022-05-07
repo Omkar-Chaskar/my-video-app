@@ -1,0 +1,30 @@
+.text-dark {
+    color: var(--dark);
+    font-weight: bold;
+  }
+  
+  .sidebar-nav-list {
+    margin-top: 0.5rem;
+  }
+
+  .sidebar-nav-list a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--gray-900);
+  }
+
+  .sidebar-nav-list a svg {
+    font-size: 1.7rem;
+  }
+  
+  @media screen and (max-width: 800px) {
+      .sidebar-nav {
+        position: relative;
+        border-bottom: none;
+      }
+      .sidebar-nav-contain {
+        justify-content: space-evenly;
+      }
+    }
