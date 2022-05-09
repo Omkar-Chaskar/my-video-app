@@ -1,0 +1,75 @@
+.main {
+    margin-top: 3rem;
+    margin-left: 13rem;
+    padding: 1rem;
+    background-color: var(--gray-100);
+  }
+  
+  .main-product-count {
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .video-container {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    justify-content: space-evenly;
+    padding: 0;
+  }
+  
+  .card-vertical {
+    margin: 0;
+    width: 15rem;
+    min-width: 12rem;
+    background-color: var(--white);
+  }
+  
+  .card__primary-action-vertical {
+    margin: 0;
+  }
+  
+  .card-badge-vertical {
+    color: inherit;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 0.1rem;
+    border: 1px solid var(--gray-300);
+    cursor: pointer;
+  }
+  
+  .card-badge-vertical:hover {
+    color: var(--danger);
+    background-color: inherit;
+  }
+  
+  .card__media-column-vertical {
+    padding: 0.1rem;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .card__secondary-vertical {
+    padding-bottom: 0;
+  }
+  
+  .card__title {
+    font-size: 1rem;
+  }
+
+  .card__subtitle {
+    padding-top: 0.5rem;
+    margin: 0;
+  }
+  
+  .card__secondary-vertical {
+    padding: 0.5rem 0;
+  }
+  
+  .card-img-height {
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn-full {
+    width: -webkit-fill-available;
+  }

@@ -1,43 +1,35 @@
-import "./App.css";
-import logo from "./logo.png";
+import "./styles.css";
+import { Routes, Route } from "react-router-dom";
+import Header from "./component/header";
+import Navigation from "./component/navigation";
+import Home from "./component/home";
+import History from "./component/history";
+import WatchLater from "./component/watchLater";
+import PlayList from "./component/playList";
+import LikeVideo from "./component/likeVideo";
+import SingleVideo from "./component/singleVideo";
+import Login from "./component/login";
+import Signup from "./component/signup";
+import NotFound from "./component/notFound";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="mockBee logo" width="180" height="180" />
-        <h1 className="brand-title">
-          Welcome to <span>mockBee!</span>
-        </h1>
-        <p className="brand-description">
-          Get started by editing <code>src/App.js</code>
-        </p>
-        <div className="links">
-          <a
-            href="https://mockbee.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Explore mockBee
-          </a>
-          <a
-            href="https://mockbee.netlify.app/docs/api/introduction"
-            target="_blank"
-            rel="noreferrer"
-          >
-            API Documentation
-          </a>
-          <a
-            href="https://github.com/neogcamp/mockBee"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Contribute
-          </a>
-        </div>
-      </header>
+      <Header />
+      <Navigation />
+      <div className="doc-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="History" element={<History />} />
+          <Route path="WatchLater" element={<WatchLater />} />
+          <Route path="PlayList" element={<PlayList />} />
+          <Route path="LikeVideo" element={<LikeVideo />} />
+          <Route path="SingleVideo" element={<SingleVideo />} />
+          <Route path="Login" element={<Login />} />
+          <Route path="Signup" element={<Signup />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </div>
   );
 }
-
-export default App;

@@ -1,0 +1,14 @@
+.playlist-header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 20rem;
+    padding: 0 1rem;
+}
