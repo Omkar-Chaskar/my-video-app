@@ -1,8 +1,11 @@
 import "../styles.css";
 import { Link } from "react-router-dom";
-import {AiTwotoneLike} from "react-icons/ai";
+import { AiTwotoneLike } from "react-icons/ai";
+import { useVideo } from "../context/videoProvider";
 
 export default function Home() {
+  
+  const { videoList } = useVideo();
 
   return (
     <div className="home">
@@ -10,11 +13,13 @@ export default function Home() {
         <div className="main-header-container flex">
           <h5 className="main-header p4">Recommended Videos</h5>
           <p className="p1 main-product-count">
-            ( Showing <span id="product-count">20</span> videos )
+            ( Showing <span id="product-count">{videoList.length}</span> videos )
           </p>
         </div>
         <ul className="video-container">
-              <li className="card-vertical">
+          {videoList.map((video) => {
+            return (
+              <li className="card-vertical" key={video._id}>
                 <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
                   <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
                     <AiTwotoneLike />
@@ -22,166 +27,26 @@ export default function Home() {
                   <div className="card__media-column card__media-column-vertical">
                     <img
                       className="card-img-height"
-                      src="https://i.ytimg.com/vi/Ezk2AwqgS9Q/hqdefault.jpg?s…j0AgKJDeAE=&rs=AOn4CLA1VisFh6_Uurec8nadJS6rc2Mdyw"
-                      alt=""
+                      src={video.pic}
+                      alt={video.title}
                     />
                   </div>
                 </div>
                 <div className="card__secondary text-center card__secondary-vertical">
                   <h4 className="card__subtitle text-center">
-                  <p className="card__title">Data Visualization with D3</p>
+                    <p className="card__title">{video.title}</p>
                   </h4>
                 </div>
                 <div className="card__action-buttons text-center">
-                  <Link className="text-dark" to="/SingleVideo">
-                    <button
-                      className="button button-secondary p1 btn-full bold"
-                    >
+                  <Link className="text-dark" to={`/SingleVideo/${video._id}`}>
+                    <button className="button button-secondary p1 btn-full bold">
                       Watch Now
                     </button>
                   </Link>
                 </div>
               </li>
-              <li className="card-vertical">
-                <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
-                  <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
-                    <AiTwotoneLike />
-                  </span>
-                  <div className="card__media-column card__media-column-vertical">
-                    <img
-                      className="card-img-height"
-                      src="	https://i.ytimg.com/vi/_L-UszPmy2A/hqdefault.jpg?s…j0AgKJDeAE=&rs=AOn4CLC4-OXdTPpZdf3llkLcLVEjzl-bGg"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div className="card__secondary text-center card__secondary-vertical">
-                  <h4 className="card__subtitle text-center">
-                  <p className="card__title">Data Visualization with D3</p>
-                  </h4>
-                </div>
-                <div className="card__action-buttons text-center">
-                  <Link className="text-dark" to="/SingleVideo">
-                    <button
-                      className="button button-secondary p1 btn-full bold"
-                    >
-                      Watch Now
-                    </button>
-                  </Link>
-                </div>
-              </li>
-              <li className="card-vertical">
-                <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
-                  <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
-                    <AiTwotoneLike />
-                  </span>
-                  <div className="card__media-column card__media-column-vertical">
-                    <img
-                      className="card-img-height"
-                      src="https://i.ytimg.com/vi/MMEIVh49pS8/hqdefault.jpg?s…j0AgKJDeAE=&rs=AOn4CLCgITDTeBCwKkr2CW3zt-bt3P5uSA"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div className="card__secondary text-center card__secondary-vertical">
-                  <h4 className="card__subtitle text-center">
-                  <p className="card__title">Data Visualization with D3</p>
-                  </h4>
-                </div>
-                <div className="card__action-buttons text-center">
-                  <Link className="text-dark" to="/SingleVideo">
-                    <button
-                      className="button button-secondary p1 btn-full bold"
-                    >
-                      Watch Now
-                    </button>
-                  </Link>
-                </div>
-              </li>
-              <li className="card-vertical">
-                <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
-                  <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
-                    <AiTwotoneLike />
-                  </span>
-                  <div className="card__media-column card__media-column-vertical">
-                    <img
-                      className="card-img-height"
-                      src="https://i.ytimg.com/vi/No8qdcVYiQw/hqdefault.jpg?s…j0AgKJDeAE=&rs=AOn4CLB5Y0QC8VlGkKbJ6fjwnhOPrdkLyw"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div className="card__secondary text-center card__secondary-vertical">
-                  <h4 className="card__subtitle text-center">
-                  <p className="card__title">Data Visualization with D3</p>
-                  </h4>
-                </div>
-                <div className="card__action-buttons text-center">
-                  <Link className="text-dark" to="/SingleVideo">
-                    <button
-                      className="button button-secondary p1 btn-full bold"
-                    >
-                      Watch Now
-                    </button>
-                  </Link>
-                </div>
-              </li>
-              <li className="card-vertical">
-                <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
-                  <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
-                    <AiTwotoneLike />
-                  </span>
-                  <div className="card__media-column card__media-column-vertical">
-                    <img
-                      className="card-img-height"
-                      src="	https://i.ytimg.com/vi/u6_a0d94A1Q/hqdefault.jpg?s…j0AgKJDeAE=&rs=AOn4CLCFbCbuzqAtwJwTRe63CQW8GAmlsw"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div className="card__secondary text-center card__secondary-vertical">
-                  <h4 className="card__subtitle text-center">
-                  <p className="card__title">Data Visualization with D3</p>
-                  </h4>
-                </div>
-                <div className="card__action-buttons text-center">
-                  <Link className="text-dark" to="/SingleVideo">
-                    <button
-                      className="button button-secondary p1 btn-full bold"
-                    >
-                      Watch Now
-                    </button>
-                  </Link>
-                </div>
-              </li>
-              <li className="card-vertical">
-                <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
-                  <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
-                    <AiTwotoneLike />
-                  </span>
-                  <div className="card__media-column card__media-column-vertical">
-                    <img
-                      className="card-img-height"
-                      src="https://i.ytimg.com/vi/yLZazznWoAs/hqdefault.jpg?s…j0AgKJDeAE=&rs=AOn4CLDEXYMLowXfqVUeYVrT-OJqQDUJUA"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div className="card__secondary text-center card__secondary-vertical">
-                  <h4 className="card__subtitle text-center">
-                  <p className="card__title">Data Visualization with D3</p>
-                  </h4>
-                </div>
-                <div className="card__action-buttons text-center">
-                  <Link className="text-dark" to="/SingleVideo">
-                    <button
-                      className="button button-secondary p1 btn-full bold"
-                    >
-                      Watch Now
-                    </button>
-                  </Link>
-                </div>
-              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

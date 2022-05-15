@@ -20,13 +20,13 @@ export default function App() {
       <div className="doc-container">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="History" element={<History />} />
-          <Route path="WatchLater" element={<WatchLater />} />
-          <Route path="PlayList" element={<PlayList />} />
-          <Route path="LikeVideo" element={<LikeVideo />} />
-          <Route path="SingleVideo" element={<SingleVideo />} />
-          <Route path="Login" element={<Login />} />
-          <Route path="Signup" element={<Signup />} />
+          <Route path="/History" element={<History />} />
+          <Route path="/WatchLater" element={<WatchLater />} />
+          <Route path="/PlayList" element={<PlayList />} />
+          <Route path="/LikeVideo" element={<LikeVideo />} />
+          <Route path="/SingleVideo/:videoId" element={<SingleVideo />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
