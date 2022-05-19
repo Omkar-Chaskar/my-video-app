@@ -8,22 +8,25 @@ import { VideosProvider } from "./context/videoProvider";
 import { LikeVideosProvider } from "./context/likeVideosProvider";
 import { HistoryProvider } from "./context/historyProvider";
 import { WatchLaterProvider } from "./context/watchLaterProvider";
+import { PlayListProvider } from "./context/playListProvider";
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <WatchLaterProvider>
-      <HistoryProvider>
-        <LikeVideosProvider>
-          <VideosProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </VideosProvider>
-        </LikeVideosProvider>
-      </HistoryProvider>
-    </WatchLaterProvider>
+    <PlayListProvider>
+      <WatchLaterProvider>
+        <HistoryProvider>
+          <LikeVideosProvider>
+            <VideosProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </VideosProvider>
+          </LikeVideosProvider>
+        </HistoryProvider>
+      </WatchLaterProvider>
+    </PlayListProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

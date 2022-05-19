@@ -5,6 +5,7 @@ import { useVideo } from "../context/videoProvider";
 import { useLikeVideos } from "../context/likeVideosProvider";
 import { useHistory } from "../context/historyProvider";
 import { useWatchLater } from "../context/watchLaterProvider";
+import ModalList from "./modal";
 
 const SingleVideo = () => {
   const { videoId } = useParams();
@@ -94,9 +95,7 @@ const SingleVideo = () => {
                     Add to Watch Later
                   </button>
                 )}
-                <button className="btn-playlist button button-primary p1 bold">
-                  Add to PlayList
-                </button>
+                <ModalList video={video} />
               </div>
             </div>
           </div>
