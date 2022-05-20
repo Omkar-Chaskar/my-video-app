@@ -1,14 +1,14 @@
 import "../styles.css";
 import { Link } from "react-router-dom";
 import { AiTwotoneLike } from "react-icons/ai";
-import { useVideo } from "../context/videoProvider";
-import { useLikeVideos } from "../context/likeVideosProvider";
-import { useHistory } from "../context/historyProvider";
+import { useVideo, useLikeVideos, useHistory, useAuth } from "../context";
 
 export default function Home() {
   const { videoList } = useVideo();
   const { likeState, likeDispatch } = useLikeVideos();
   const { historyDispatch } = useHistory();
+  const { user } = useAuth();
+  const { loginStatus } = user;
 
   return (
     <div className="home">
@@ -25,28 +25,35 @@ export default function Home() {
             return (
               <li className="card-vertical" key={video._id}>
                 <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
-                  <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
-                    {likeState.likeVideos &&
-                    likeState.likeVideos.some(
-                      (item) => video._id === item._id
-                    ) ? (
-                      <AiTwotoneLike
-                        color="red"
-                        onClick={() =>
-                          likeDispatch({
-                            type: "REMOVE_FROM_LIKE",
-                            payload: video
-                          })
-                        }
-                      />
-                    ) : (
-                      <AiTwotoneLike
-                        onClick={() =>
-                          likeDispatch({ type: "ADD_TO_LIKE", payload: video })
-                        }
-                      />
-                    )}
-                  </span>
+                  {loginStatus ? (
+                    <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
+                      {likeState.likeVideos &&
+                      likeState.likeVideos.some(
+                        (item) => video._id === item._id
+                      ) ? (
+                        <AiTwotoneLike
+                          color="red"
+                          onClick={() =>
+                            likeDispatch({
+                              type: "REMOVE_FROM_LIKE",
+                              payload: video
+                            })
+                          }
+                        />
+                      ) : (
+                        <AiTwotoneLike
+                          onClick={() =>
+                            likeDispatch({
+                              type: "ADD_TO_LIKE",
+                              payload: video
+                            })
+                          }
+                        />
+                      )}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   <div className="card__media-column card__media-column-vertical">
                     <img
                       className="card-img-height"

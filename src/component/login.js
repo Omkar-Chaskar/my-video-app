@@ -1,7 +1,21 @@
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  initialLogInData,
+  guestData
+} from "../utils/constantData/authConstant";
+import { useAuth } from "../context";
 
 export default function Login() {
+  const [logInData, setLogInData] = useState(initialLogInData);
+  const [passVisible, setPassVisible] = useState(true);
+  const { logInHandler } = useAuth();
 
+  const logInChaneHnadler = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setLogInData((prevData) => ({ ...prevData, [name]: value }));
+  };
   return (
     <section className="login">
       <form className="form-action" id="form">
@@ -17,6 +31,7 @@ export default function Login() {
             id="email"
             name="email"
             placeholder="Jane@compony.com"
+            onChange={logInChaneHnadler}
             required
           />
           <p className="input-danger" id="invalid-email"></p>
@@ -26,40 +41,48 @@ export default function Login() {
           </label>
           <input
             className="input-action"
-            type="password"
+            type={passVisible ? "password" : "text"}
             id="password"
             name="password"
             minLength="8"
             maxLength="15"
             placeholder="********"
+            onChange={logInChaneHnadler}
             required
           />
+          <span className="flex-center">
+            {passVisible ? (
+              <p className="p1" onClick={() => setPassVisible(!passVisible)}>
+                Show Password
+              </p>
+            ) : (
+              <p className="p1" onClick={() => setPassVisible(!passVisible)}>
+                Hide Password
+              </p>
+            )}
+          </span>
           <p className="input-danger" id="invalid-password"></p>
-          <div>
-            <div>
-              <input
-                type="checkbox"
-                name="checkterms"
-                id="checkterms"
-                required
-              />
-              <label htmlFor="checkterms" className="p1">
-                {" "}
-                Remember me
-              </label>
-            </div>
-            <div className="link-forgot">
-              <a href="./forgotpassword.html">Forgot your Password?</a>
-            </div>
-          </div>
 
           <div className="text-center">
             <button
               className="button button-primary btn-full bold btn-submit"
               id="btn-submit"
               type="submit"
+              onClick={(e) => {
+                logInHandler(logInData);
+              }}
             >
               Login
+            </button>
+            <button
+              className="button button-secondary btn-full bold btn-submit"
+              id="btn-submit"
+              type="submit"
+              onClick={(e) => {
+                logInHandler(guestData);
+              }}
+            >
+              Guest Login
             </button>
             <Link className="link-create" to="/Signup" id="btn-cancel">
               Create New Account
