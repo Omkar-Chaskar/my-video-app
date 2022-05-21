@@ -1,10 +1,13 @@
 import ReactPlayer from "react-player/youtube";
 import { Link, useParams } from "react-router-dom";
 import { AiTwotoneLike } from "react-icons/ai";
-import { useVideo } from "../context/videoProvider";
-import { useLikeVideos } from "../context/likeVideosProvider";
-import { useHistory } from "../context/historyProvider";
-import { useWatchLater } from "../context/watchLaterProvider";
+import {
+  useVideo,
+  useLikeVideos,
+  useHistory,
+  useWatchLater,
+  useAuth
+} from "../context";
 import ModalList from "./modal";
 
 const SingleVideo = () => {
@@ -13,6 +16,8 @@ const SingleVideo = () => {
   const { likeState, likeDispatch } = useLikeVideos();
   const { historyDispatch } = useHistory();
   const { watchLaterState, watchLaterDispatch } = useWatchLater();
+  const { user } = useAuth();
+  const { loginStatus } = user;
 
   function getVideoDetails(videoList, videoId) {
     return videoList.filter((video) => video._id === videoId);
@@ -42,61 +47,67 @@ const SingleVideo = () => {
               <h3 className="video-title">{video.title}</h3>
               <p>{video.description}</p>
               <p>{video.creator}</p>
-              <div className="btn-container">
-                {likeState.likeVideos &&
-                likeState.likeVideos.some((item) => video._id === item._id) ? (
-                  <button
-                    className="btn-like button button-danger p1 bold"
-                    onClick={() =>
-                      likeDispatch({
-                        type: "REMOVE_FROM_LIKE",
-                        payload: video
-                      })
-                    }
-                  >
-                    DisLike
-                  </button>
-                ) : (
-                  <button
-                    className="btn-like button button-danger p1 bold"
-                    onClick={() =>
-                      likeDispatch({ type: "ADD_TO_LIKE", payload: video })
-                    }
-                  >
-                    Like
-                  </button>
-                )}
+              {loginStatus ? (
+                <div className="btn-container">
+                  {likeState.likeVideos &&
+                  likeState.likeVideos.some(
+                    (item) => video._id === item._id
+                  ) ? (
+                    <button
+                      className="btn-like button button-danger p1 bold"
+                      onClick={() =>
+                        likeDispatch({
+                          type: "REMOVE_FROM_LIKE",
+                          payload: video
+                        })
+                      }
+                    >
+                      DisLike
+                    </button>
+                  ) : (
+                    <button
+                      className="btn-like button button-danger p1 bold"
+                      onClick={() =>
+                        likeDispatch({ type: "ADD_TO_LIKE", payload: video })
+                      }
+                    >
+                      Like
+                    </button>
+                  )}
 
-                {watchLaterState.watchLater &&
-                watchLaterState.watchLater.some(
-                  (item) => video._id === item._id
-                ) ? (
-                  <button
-                    className="btn-watch-later button button-primary p1 bold"
-                    onClick={() =>
-                      watchLaterDispatch({
-                        type: "REMOVE_FROM_WATCHLATER",
-                        payload: video
-                      })
-                    }
-                  >
-                    Remove from Watch Later
-                  </button>
-                ) : (
-                  <button
-                    className="btn-watch-later button button-primary p1 bold"
-                    onClick={() =>
-                      watchLaterDispatch({
-                        type: "ADD_TO_WATCHLATER",
-                        payload: video
-                      })
-                    }
-                  >
-                    Add to Watch Later
-                  </button>
-                )}
-                <ModalList video={video} />
-              </div>
+                  {watchLaterState.watchLater &&
+                  watchLaterState.watchLater.some(
+                    (item) => video._id === item._id
+                  ) ? (
+                    <button
+                      className="btn-watch-later button button-primary p1 bold"
+                      onClick={() =>
+                        watchLaterDispatch({
+                          type: "REMOVE_FROM_WATCHLATER",
+                          payload: video
+                        })
+                      }
+                    >
+                      Remove from Watch Later
+                    </button>
+                  ) : (
+                    <button
+                      className="btn-watch-later button button-primary p1 bold"
+                      onClick={() =>
+                        watchLaterDispatch({
+                          type: "ADD_TO_WATCHLATER",
+                          payload: video
+                        })
+                      }
+                    >
+                      Add to Watch Later
+                    </button>
+                  )}
+                  <ModalList video={video} />
+                </div>
+              ) : (
+                <br />
+              )}
             </div>
           </div>
         );
@@ -114,28 +125,35 @@ const SingleVideo = () => {
             return (
               <li className="card-vertical" key={video._id}>
                 <div className="card__primary-action card__primary-action-column card__primary-action-vertical">
-                  <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
-                    {likeState.likeVideos &&
-                    likeState.likeVideos.some(
-                      (item) => video._id === item._id
-                    ) ? (
-                      <AiTwotoneLike
-                        color="red"
-                        onClick={() =>
-                          likeDispatch({
-                            type: "REMOVE_FROM_LIKE",
-                            payload: video
-                          })
-                        }
-                      />
-                    ) : (
-                      <AiTwotoneLike
-                        onClick={() =>
-                          likeDispatch({ type: "ADD_TO_LIKE", payload: video })
-                        }
-                      />
-                    )}
-                  </span>
+                  {loginStatus ? (
+                    <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical">
+                      {likeState.likeVideos &&
+                      likeState.likeVideos.some(
+                        (item) => video._id === item._id
+                      ) ? (
+                        <AiTwotoneLike
+                          color="red"
+                          onClick={() =>
+                            likeDispatch({
+                              type: "REMOVE_FROM_LIKE",
+                              payload: video
+                            })
+                          }
+                        />
+                      ) : (
+                        <AiTwotoneLike
+                          onClick={() =>
+                            likeDispatch({
+                              type: "ADD_TO_LIKE",
+                              payload: video
+                            })
+                          }
+                        />
+                      )}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   <div className="card__media-column card__media-column-vertical">
                     <img
                       className="card-img-height"
