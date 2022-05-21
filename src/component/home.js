@@ -52,7 +52,7 @@ export default function Home() {
                       )}
                     </span>
                   ) : (
-                    ""
+                    <span className="material-icons-outlined badge-up-right-corner card-badge card-badge-vertical"></span>
                   )}
                   <div className="card__media-column card__media-column-vertical">
                     <img
